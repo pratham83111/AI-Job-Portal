@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 🌟 Hero Section -->
+<div class="text-center py-5" 
+     style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            color: white; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"
+     data-aos="fade-down">
+  <h1 class="fw-bold mb-3">🚀 Welcome to AI Job Portal</h1>
+  <p class="lead">Find your dream job powered by Artificial Intelligence</p>
+  {% if user.is_authenticated %}
+    <a href="{% url 'job_list' %}" class="btn btn-light px-4 mt-3">Explore Jobs</a>
+  {% else %}
+    <a href="{% url 'register' %}" class="btn btn-light px-4 mt-3">Get Started</a>
+  {% endif %}
+</div>
+
+<!-- Small Info Section -->
+<div class="row text-center mt-5">
+  <div class="col-md-4" data-aos="fade-up">
+    <h4>💼 100+ Job Listings</h4>
+    <p>Explore verified job openings posted by real companies.</p>
+  </div>
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+    <h4>🤖 Smart AI Recommendations</h4>
+    <p>Get job matches based on your unique skillset.</p>
+  </div>
+  <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+    <h4>⚡ Instant Apply</h4>
+    <p>Save time with a fast, one-click job apply system.</p>
+  </div>
+</div>
+{% endblock %}
