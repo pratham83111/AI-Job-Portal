@@ -2,117 +2,146 @@
 {% block content %}
 
 <style>
-  /* Beautiful gradient background */
-  body {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    font-family: 'Poppins', sans-serif;
+  /* 🌈 Background gradient with blur overlay */
+  .login-page {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Main login card */
+  /* Glass effect layer */
+  .login-page::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    filter: blur(80px);
+    z-index: 0;
+  }
+
+  /* ✨ Card */
   .login-container {
-    background: white;
-    padding: 100px 80px;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 4800px;
+    max-width: 400px;
+    padding: 50px 35px;
     text-align: center;
-    animation: fadeIn 0.8s ease-in-out;
+    color: #fff;
+    animation: fadeIn 0.9s ease-in-out;
   }
 
   .login-container h2 {
-    color: #333;
     margin-bottom: 25px;
+    font-size: 2rem;
     font-weight: 700;
-    font-size: 2.2rem;
     letter-spacing: 1px;
+    color: #fff;
   }
-z
+
+  /* Inputs */
   input[type="text"],
   input[type="password"] {
     width: 100%;
     padding: 14px 16px;
     margin: 10px 0;
-    border: 2px solid #ddd;
+    border: none;
     border-radius: 12px;
     outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
     font-size: 1rem;
     transition: all 0.3s ease;
   }
 
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-color: #6a11cb;
-    box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+  input::placeholder {
+    color: #e0e0e0;
   }
 
+  input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  }
+
+  /* Button */
   button {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    margin-top: 15px;
+    background: linear-gradient(90deg, #ff9966, #ff5e62);
     color: white;
     border: none;
     border-radius: 12px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255,94,98,0.4);
     transition: 0.3s;
-    margin-top: 15px;
   }
 
   button:hover {
     transform: scale(1.03);
-    background: linear-gradient(90deg, #2575fc, #6a11cb);
+    box-shadow: 0 8px 20px rgba(255,94,98,0.6);
   }
 
+  /* Link */
   .login-container a {
     display: inline-block;
     margin-top: 20px;
-    color: #2575fc;
+    color: #ffe9ec;
     text-decoration: none;
     font-weight: 500;
     transition: 0.3s;
   }
 
   .login-container a:hover {
-    color: #6a11cb;
+    color: #fff;
     text-decoration: underline;
   }
 
   /* Animation */
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Responsive Design */
+  /* Responsive */
   @media (max-width: 600px) {
     .login-container {
       width: 90%;
-      padding: 40px 25px;
+      padding: 35px 25px;
     }
 
     .login-container h2 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
     }
   }
 </style>
-<div class="card p-4 mx-auto" data-aos="zoom-in" style="max-width: 400px;">
 
-<div class="login-container">
-  <h2>Welcome Back 👋</h2>
-  <form method="POST">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Enter Username" required>
-    <input type="password" name="password" placeholder="Enter Password" required>
-    <button type="submit">Login</button>
-  </form>
-  <a href="/register/">✨ Create a new account</a>
+<div class="login-page">
+  <div class="login-container">
+    <h2>Welcome Back 👋</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Enter Username" required>
+      <input type="password" name="password" placeholder="Enter Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <a href="/register/">✨ Create a new account</a>
+  </div>
 </div>
 
 {% endblock %}
